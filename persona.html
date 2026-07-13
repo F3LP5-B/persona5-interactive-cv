@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felipe Bragança | Software Engineer</title>
+    <meta name="description" content="Interactive Persona 5-inspired portfolio - Felipe Bragança">
+    <link rel="stylesheet" href="css/persona.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="loading-wrapper">
+            <div class="loading-cuts">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="dancing-text">
+                <span style="--i:1">T</span>
+                <span style="--i:2">A</span>
+                <span style="--i:3">K</span>
+                <span style="--i:4">E</span>
+                <span class="space"></span>
+                <span style="--i:5">Y</span>
+                <span style="--i:6">O</span>
+                <span style="--i:7">U</span>
+                <span style="--i:8">R</span>
+                <span class="space"></span>
+                <span style="--i:9">T</span>
+                <span style="--i:10">I</span>
+                <span style="--i:11">M</span>
+                <span style="--i:12">E</span>
+            </div>
+            <div class="loading-hud">
+                <div class="loading-bar-container">
+                    <div class="loading-bar-fill"></div>
+                </div>
+                <div class="loading-percent">0%</div>
+                <div class="loading-star"></div>
+            </div>
+            <p class="loading-subtitle">BOOTING CONFIDANT SYSTEM</p>
+            <p class="loading-tip">Loading phantom interface...</p>
+            <div class="loading-impact"></div>
+        </div>
+    </div>
+
+    <div id="particles-container"></div>
+    <div id="noise-layer"></div>
+
+    <!-- SLASH TRANSITION EFFECT -->
+    <div id="slash-transition">
+        <span class="slash red"></span>
+        <span class="slash black"></span>
+        <span class="slash white"></span>
+    </div>
+
+    <div id="background">
+        <div class="bg-red"></div>
+        <div class="bg-pattern"></div>
+        <div class="bg-halftone"></div>
+        <div class="bg-stripes"></div>
+        <div class="bg-rings"></div>
+        <div class="bg-ink"></div>
+    </div>
+    <div class="bg-persona-art"></div>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero">
+            <div class="hero-content">
+                <div class="hero-statusline">
+                    <span>CONFIDANT RECORD</span>
+                    <strong>ACTIVE</strong>
+                </div>
+                <p class="rank">SOFTWARE ENGINEER</p>
+                <h1 class="hero-name">
+                    FELIPE <span>BRAGANÇA</span>
+                </h1>
+                <p class="hero-text">
+                    Creating impactful digital experiences, building robust mechanics in Unreal Engine, and shaping elegant code solutions. Unlocking software's full potential.
+                </p>
+                <nav class="main-menu" aria-label="Primary navigation">
+                    <div class="main-menu-top">
+                        <span class="menu-badge">MENU</span>
+                        <span class="menu-system">CONFIDANT FILE</span>
+                    </div>
+                    <a href="#about" class="menu-btn active">
+                        <span class="menu-label">ABOUT</span>
+                        <span class="menu-arrow">▶</span>
+                    </a>
+                    <a href="#skills" class="menu-btn">
+                        <span class="menu-label">SKILLS</span>
+                        <span class="menu-arrow">▶</span>
+                    </a>
+                    <a href="#projects" class="menu-btn">
+                        <span class="menu-label">PROJECTS</span>
+                        <span class="menu-arrow">▶</span>
+                    </a>
+                    <a href="#education" class="menu-btn">
+                        <span class="menu-label">EDUCATION</span>
+                        <span class="menu-arrow">▶</span>
+                    </a>
+                    <a href="#contact" class="menu-btn">
+                        <span class="menu-label">CONTACT</span>
+                        <span class="menu-arrow">▶</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="persona-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="persona-modal">
+                <div class="card-header">PERSONA USER</div>
+                <div class="persona-core">CORE FILE</div>
+                <div class="profile-image">
+                    <img src="assets/images/persona-profile.jpeg" alt="Felipe Bragança">
+                </div>
+                <h2>FELIPE</h2>
+                <p>LVL 21</p>
+                <div class="arcana">
+                    ARCANA: <strong>THE MAGICIAN</strong>
+                </div>
+                <div class="stats-badge">
+                    <span>AGI ★★★★★</span>
+                    <span>LUK ★★★★☆</span>
+                </div>
+                <p class="persona-card-hint">CLICK FOR DETAILS</p>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="page" id="about">
+            <h2>STATUS</h2>
+            <div class="content-card persona-status">
+                <div class="status-block">
+                    <h3>PROFILE</h3>
+                    <div class="status-line"><span>NAME</span><strong>FELIPE BRAGANÇA</strong></div>
+                    <div class="status-line"><span>LEVEL</span><strong>21</strong></div>
+                    <div class="status-line"><span>ROLE</span><strong>SOFTWARE ENGINEERING STUDENT</strong></div>
+                    <div class="status-line"><span>ARCANA</span><strong>THE MAGICIAN</strong></div>
+                </div>
+
+                <div class="status-block">
+                    <h3>CURRENT ROLE</h3>
+                    <div class="status-line"><span>POSITION</span><strong>IT INTERN</strong></div>
+                    <div class="status-line"><span>ORGANIZATION</span><strong>NOVA LIMA CITY HALL</strong></div>
+                    <div class="status-description">
+                        Building solid professional experience with technology infrastructure, analytical support, fast problem solving, and IT solution architecture.
+                    </div>
+                </div>
+
+                <div class="status-block">
+                    <h3>EDUCATION</h3>
+                    <div class="status-line"><span>INSTITUTION</span><strong>PUC MINAS</strong></div>
+                    <div class="status-line"><span>COURSE</span><strong>SOFTWARE ENGINEERING</strong></div>
+                    <div class="status-line"><span>CURRENT LEVEL</span><strong>5TH SEMESTER</strong></div>
+                    <div class="status-line"><span>SHIFT</span><strong>NIGHT</strong></div>
+                </div>
+
+                <div class="status-block">
+                    <h3>LANGUAGES</h3>
+                    <div class="language-item">
+                        <div class="language-header">
+                            <span>PORTUGUESE</span>
+                            <small>NATIVE</small>
+                        </div>
+                        <div class="language-bar"><div class="language-fill native" style="width: 100%"></div></div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-header">
+                            <span>ENGLISH</span>
+                            <small>FLUENT - CERTIFIED</small>
+                        </div>
+                        <div class="language-bar"><div class="language-fill english" style="width: 90%"></div></div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-header">
+                            <span>SPANISH</span>
+                            <small>INTERMEDIATE</small>
+                        </div>
+                        <div class="language-bar"><div class="language-fill spanish" style="width: 55%"></div></div>
+                    </div>
+                </div>
+
+                <div class="status-block interests-block">
+                    <h3>INTERESTS</h3>
+                    <div class="tags">
+                        <span>SOFTWARE DEVELOPMENT</span>
+                        <span>GAME DEVELOPMENT</span>
+                        <span>UNREAL ENGINE</span>
+                        <span>DIGITAL EXPERIENCES</span>
+                        <span>TECHNOLOGY</span>
+                    </div>
+                </div>
+            </div>
+            <button class="return-button">RETURN</button>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="page" id="skills">
+            <h2>SKILL TREE</h2>
+            <div class="content-card skill-tree-card">
+                <div class="skill-tree-header">
+                    <span class="skill-tree-tag">BATTLE STATS</span>
+                    <span class="skill-tree-note">CONFIDANT GROWTH PANEL</span>
+                </div>
+                <div class="skill">
+                    <div class="skill-head">
+                        <span>JAVA</span>
+                        <small>TACTICAL</small>
+                    </div>
+                    <div class="bar"><div class="fill" data-level="72"></div><b class="skill-value">0%</b></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-head">
+                        <span>C / C++</span>
+                        <small>ENGINE CORE</small>
+                    </div>
+                    <div class="bar"><div class="fill" data-level="70"></div><b class="skill-value">0%</b></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-head">
+                        <span>HTML / CSS / JS</span>
+                        <small>UI PHANTOM</small>
+                    </div>
+                    <div class="bar"><div class="fill" data-level="85"></div><b class="skill-value">0%</b></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-head">
+                        <span>SQL</span>
+                        <small>DATA CONTROL</small>
+                    </div>
+                    <div class="bar"><div class="fill" data-level="75"></div><b class="skill-value">0%</b></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-head">
+                        <span>ENGLISH</span>
+                        <small>GLOBAL LINK</small>
+                    </div>
+                    <div class="bar"><div class="fill" data-level="89"></div><b class="skill-value">0%</b></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-head">
+                        <span>SPANISH</span>
+                        <small>SUPPORT</small>
+                    </div>
+                    <div class="bar"><div class="fill" data-level="75"></div><b class="skill-value">0%</b></div>
+                </div>
+            </div>
+            <button class="return-button">RETURN</button>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section class="page" id="projects">
+            <h2>CONFIDANTS</h2>
+            <div class="projects-grid">
+                <div class="confidants-hud">
+                    <span class="confidants-hud-tag">ACTIVE LINKS</span>
+                    <p>Each project is treated as a confidant path with rank progression, specialty, and execution impact.</p>
+                </div>
+                <div class="content-card project">
+                    <div class="confidant-top">
+                        <h3 class="rank-badge">RANK 01</h3>
+                        <span class="confidant-arcana">ARCANA: EMPEROR</span>
+                    </div>
+                    <h4>Java Parking System</h4>
+                    <p>Advanced parking management and control system developed in Java. The application was built using the MVC pattern, with full CRUD operations and efficient data persistence.</p>
+                    <ul class="confidant-tags">
+                        <li>MVC</li>
+                        <li>CRUD</li>
+                        <li>DATA PERSISTENCE</li>
+                    </ul>
+                    <div class="confidant-link-meter">
+                        <span>CONFIDANT SYNC</span>
+                        <div class="link-meter"><b class="link-fill rank-01"></b></div>
+                    </div>
+                </div>
+                <div class="content-card project">
+                    <div class="confidant-top">
+                        <h3 class="rank-badge">RANK 02</h3>
+                        <span class="confidant-arcana">ARCANA: CHARIOT</span>
+                    </div>
+                    <h4>Unreal Engine Core Project</h4>
+                    <p>Immersive project focused on creating digital experiences and interactive mechanics with Unreal Engine, exploring Blueprints and real-time environment optimization.</p>
+                    <ul class="confidant-tags">
+                        <li>UNREAL ENGINE</li>
+                        <li>BLUEPRINTS</li>
+                        <li>REAL-TIME</li>
+                    </ul>
+                    <div class="confidant-link-meter">
+                        <span>CONFIDANT SYNC</span>
+                        <div class="link-meter"><b class="link-fill rank-02"></b></div>
+                    </div>
+                </div>
+                <div class="content-card project">
+                    <div class="confidant-top">
+                        <h3 class="rank-badge">RANK 03</h3>
+                        <span class="confidant-arcana">ARCANA: HIEROPHANT</span>
+                    </div>
+                    <h4>Economic Radar 360</h4>
+                    <p>TypeScript web application for managing and visualizing public data. The app acts as an organization and presentation layer, replacing fragmented queries with an integrated interface featuring dynamic dashboards, charts, and interactive tools to improve analysis and access to data.</p>
+                    <ul class="confidant-tags">
+                        <li>TYPESCRIPT</li>
+                        <li>DASHBOARDS</li>
+                        <li>DATA VISUALIZATION</li>
+                    </ul>
+                    <div class="confidant-link-meter">
+                        <span>CONFIDANT SYNC</span>
+                        <div class="link-meter"><b class="link-fill rank-03"></b></div>
+                    </div>
+                </div>
+            </div>
+            <button class="return-button">RETURN</button>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section class="page" id="education">
+            <h2>SOCIAL LINK</h2>
+            <div class="education-grid">
+                <div class="social-link-hud">
+                    <span class="social-link-badge">CONFIDANT ROUTE</span>
+                    <p>Your academic and professional growth path shown like a Persona Social Link progression.</p>
+                </div>
+                <div class="content-card social-link-card">
+                    <div class="social-link-top">
+                        <h3>Centro Educacional São Tomás de Aquino</h3>
+                        <span class="social-rank">RANK 04</span>
+                    </div>
+                    <p class="accent-text">Foundation Arc</p>
+                    <p>Primary and secondary education with focus on communication, logic, and learning discipline.</p>
+                    <div class="social-meta">
+                        <span>2007 - 2022</span>
+                        <span>BASE STATS UNLOCKED</span>
+                    </div>
+                    <div class="social-link-meter">
+                        <b style="width: 78%"></b>
+                    </div>
+                </div>
+                <div class="content-card social-link-card active-link">
+                    <div class="social-link-top">
+                        <h3>PUC MINAS</h3>
+                        <span class="social-rank">RANK 07</span>
+                    </div>
+                    <p class="accent-text">Software Engineering</p>
+                    <p>Focused study in systems modeling, modern frameworks, data structures, architecture, and engineering methods.</p>
+                    <div class="social-meta">
+                        <span>2025 - Present</span>
+                        <span>CONFIDANT ACTIVE</span>
+                    </div>
+                    <div class="social-link-meter">
+                        <b style="width: 92%"></b>
+                    </div>
+                </div>
+            </div>
+            <button class="return-button">RETURN</button>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="page" id="contact">
+            <h2>CALLING CARD</h2>
+            <div class="content-card calling-card-box">
+                <div class="calling-stamp">PHANTOM INVITATION</div>
+                <h3>YOUR NEXT PROJECT HAS BEEN TARGETED</h3>
+                <p>Send the signal and let's launch a high-impact mission: from concept to execution, with style, speed, and clean engineering.</p>
+                <ul class="calling-objectives">
+                    <li><span>01</span> Design a distinctive user experience</li>
+                    <li><span>02</span> Build scalable and maintainable architecture</li>
+                    <li><span>03</span> Deliver polished features with confidence</li>
+                </ul>
+                <div class="calling-seal">SEAL OF CONFIDENCE</div>
+                <div class="links-group">
+                    <a href="https://github.com/F3LP5-B" target="_blank" class="contact-link">GITHUB</a>
+                    <a href="https://linkedin.com/in/felipe-bragança-godinho-a7a882277/" target="_blank" class="contact-link">LINKEDIN</a>
+                    <a href="mailto:felipegodinho183@gmail.com" class="contact-link">EMAIL</a>
+                </div>
+            </div>
+            <button class="return-button">RETURN</button>
+        </section>
+    </main>
+
+    <div id="persona-modal" aria-hidden="true">
+        <div class="persona-modal-backdrop"></div>
+        <div class="persona-modal-panel" role="dialog" aria-modal="true" aria-labelledby="persona-modal-title">
+            <button class="persona-modal-close" type="button" aria-label="Close details">×</button>
+            <div class="persona-modal-card">
+                <div class="card-header">PERSONA STATUS</div>
+                <div class="profile-image">
+                    <img src="assets/images/persona-profile.jpeg" alt="Felipe Bragança">
+                </div>
+                <h2 id="persona-modal-title">FELIPE</h2>
+                <p>LVL 21</p>
+                <div class="arcana">
+                    ARCANA: <strong>THE MAGICIAN</strong>
+                </div>
+                <div class="stats-badge">
+                    <span>AGI ★★★★★</span>
+                    <span>LUK ★★★★☆</span>
+                </div>
+            </div>
+            <div class="persona-modal-info">
+                <h3>ADDITIONAL INFO</h3>
+                <div class="persona-info-grid">
+                    <div class="persona-info-item">
+                        <span>ROLE</span>
+                        <strong>Software Engineer</strong>
+                    </div>
+                    <div class="persona-info-item">
+                        <span>FOCUS</span>
+                        <strong>Games, Web, Systems</strong>
+                    </div>
+                    <div class="persona-info-item">
+                        <span>SUPPORT</span>
+                        <strong>Unreal Engine / Java / JS</strong>
+                    </div>
+                    <div class="persona-info-item">
+                        <span>MISSION</span>
+                        <strong>Build elegant digital experiences</strong>
+                    </div>
+                </div>
+                <p class="persona-modal-text">
+                    Card analysis complete. This unit excels at creative problem solving, fast learning, and high-impact execution.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/persona.js"></script>
+</body>
+</html>
