@@ -37,6 +37,36 @@ body {
     pointer-events: none;
 }
 
+/* PHANTOM HUD */
+.phantom-hud {
+    position: fixed;
+    top: 22px;
+    right: 24px;
+    z-index: 20;
+    width: min(310px, calc(100vw - 48px));
+    padding: 10px 12px 12px;
+    color: var(--white);
+    background: rgba(5, 5, 5, 0.88);
+    border-right: 5px solid var(--red);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+    box-shadow: 7px 7px 0 rgba(230, 0, 18, 0.55);
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+}
+
+.hud-topline { display: flex; align-items: center; gap: 7px; padding-bottom: 7px; border-bottom: 1px solid rgba(255, 255, 255, 0.22); font-size: 8px; font-weight: 900; letter-spacing: 1.2px; }
+.hud-topline span:first-child { margin-right: auto; }
+.hud-live-dot { width: 7px; height: 7px; border-radius: 50%; background: #ff3648; box-shadow: 0 0 10px var(--red); animation: hudSignal 1s steps(2) infinite; }
+.hud-mainline { display: flex; align-items: center; gap: 11px; padding: 9px 0 7px; }
+.hud-index { color: var(--red); font-family: "Archivo Black", sans-serif; font-size: 34px; line-height: 1; font-style: italic; text-shadow: 2px 2px 0 var(--white); }
+.hud-label { display: block; color: #aaa; font-size: 8px; letter-spacing: 2px; }
+.hud-mainline strong { display: block; margin-top: 2px; font-family: "Archivo Black", sans-serif; font-size: 16px; letter-spacing: 1px; line-height: 1; }
+.hud-progress { height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; transform: skew(-18deg); }
+.hud-progress span { display: block; width: 15%; height: 100%; background: var(--red); box-shadow: 0 0 10px var(--red); transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+.phantom-hud p { margin-top: 7px; color: #ddd; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; }
+
+@keyframes hudSignal { 50% { opacity: 0.25; } }
+
 #noise-layer {
     background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.07), transparent 12%),
                 radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05), transparent 15%),
@@ -411,6 +441,97 @@ body {
 }
 
 .hero-content { max-width: 600px; }
+
+/* HERO AWAKENING — disparado ao fim do boot */
+body:not(.hero-awakened):not(.hero-returning):not(.hero-ready) #hero .hero-content,
+body:not(.hero-awakened):not(.hero-returning):not(.hero-ready) #hero .persona-card {
+    opacity: 0;
+}
+
+body:not(.hero-awakened):not(.hero-returning):not(.hero-ready) #hero .hero-content {
+    transform: translateX(-80px) skewX(-8deg);
+}
+
+body:not(.hero-awakened):not(.hero-returning):not(.hero-ready) #hero .persona-card {
+    transform: translateX(90px) rotate(12deg) scale(0.86);
+}
+
+body.hero-awakened #hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -28%;
+    left: 45%;
+    width: 22%;
+    height: 156%;
+    background: var(--red);
+    transform: rotate(22deg) translateX(-560%);
+    animation: heroAwakenSlash 0.74s cubic-bezier(0.18, 0.85, 0.2, 1) both;
+    pointer-events: none;
+}
+
+body.hero-awakened #hero .hero-content {
+    animation: heroContentReveal 0.56s 0.13s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+body.hero-awakened #hero .persona-card {
+    animation: heroCardReveal 0.58s 0.25s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+body.hero-returning #hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -28%;
+    left: 45%;
+    width: 22%;
+    height: 156%;
+    background: var(--white);
+    transform: rotate(-22deg) translateX(560%);
+    animation: heroReturnSlash 0.72s cubic-bezier(0.18, 0.85, 0.2, 1) both;
+    pointer-events: none;
+}
+
+body.hero-returning #hero .hero-content {
+    animation: heroReturnContent 0.56s 0.1s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+body.hero-returning #hero .persona-card {
+    animation: heroReturnCard 0.58s 0.22s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+@keyframes heroAwakenSlash {
+    0% { transform: rotate(22deg) translateX(-560%); }
+    100% { transform: rotate(22deg) translateX(650%); }
+}
+
+@keyframes heroContentReveal {
+    0% { opacity: 0; transform: translateX(-80px) skewX(-8deg); }
+    100% { opacity: 1; transform: translateX(0) skewX(0); }
+}
+
+@keyframes heroCardReveal {
+    0% { opacity: 0; transform: translateX(90px) rotate(12deg) scale(0.86); }
+    72% { opacity: 1; transform: translateX(-7px) rotate(2deg) scale(1.02); }
+    100% { opacity: 1; transform: translateX(0) rotate(4deg) scale(1); }
+}
+
+@keyframes heroReturnSlash {
+    0% { transform: rotate(-22deg) translateX(560%); }
+    100% { transform: rotate(-22deg) translateX(-650%); }
+}
+
+@keyframes heroReturnContent {
+    0% { opacity: 0; transform: translate(-80px, -70px) rotate(-4deg) skewX(-8deg); }
+    100% { opacity: 1; transform: translate(0, 0) rotate(0) skewX(0); }
+}
+
+@keyframes heroReturnCard {
+    0% { opacity: 0; transform: translate(95px, 80px) rotate(-12deg) scale(0.84); }
+    72% { opacity: 1; transform: translate(-6px, -4px) rotate(6deg) scale(1.02); }
+    100% { opacity: 1; transform: translate(0, 0) rotate(4deg) scale(1); }
+}
+
 .hero-statusline {
     display: inline-flex;
     align-items: center;
@@ -548,6 +669,13 @@ body {
     transform: translateX(8px);
 }
 
+.menu-btn:focus-visible,
+.contact-link:focus-visible,
+.return-button:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 4px;
+}
+
 .menu-label {
     flex: 1;
     letter-spacing: 1px;
@@ -580,6 +708,8 @@ body {
     position: relative;
     z-index: 2;
     overflow: hidden;
+    font: inherit;
+    text-align: left;
 }
 
 .persona-card:hover {
@@ -642,16 +772,60 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
     opacity: 0;
     transform: translateY(40px) scale(0.98);
     transition: opacity 0.6s ease, transform 0.6s ease, clip-path 0.6s ease;
     clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 92%);
 }
 
+.page::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    right: 10%;
+    width: 86px;
+    height: 8px;
+    background: repeating-linear-gradient(90deg, var(--red) 0 14px, transparent 14px 20px);
+    transform: skew(-20deg);
+    opacity: 0.85;
+}
+
 .page.show {
     opacity: 1;
     transform: translateY(0) scale(1);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* MENU SCREEN ENTRY */
+.section-enter-left { --entry-title-x: -100px; --entry-title-y: -45px; --entry-card-x: 100px; --entry-card-y: 65px; }
+.section-enter-right { --entry-title-x: 100px; --entry-title-y: -45px; --entry-card-x: -100px; --entry-card-y: 65px; }
+.section-enter-up { --entry-title-x: -35px; --entry-title-y: -95px; --entry-card-x: 75px; --entry-card-y: 95px; }
+.section-enter-down { --entry-title-x: 35px; --entry-title-y: 95px; --entry-card-x: -75px; --entry-card-y: -95px; }
+
+.section-entering > h2 {
+    animation: sectionTitleLaunch 0.46s 0.06s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.section-entering .content-card,
+.section-entering .confidants-hud,
+.section-entering .social-link-hud {
+    animation: sectionCardLaunch 0.56s 0.17s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.section-entering .content-card:nth-child(2) { animation-delay: 0.24s; }
+.section-entering .content-card:nth-child(3) { animation-delay: 0.31s; }
+.section-entering .content-card:nth-child(4) { animation-delay: 0.38s; }
+
+@keyframes sectionTitleLaunch {
+    0% { opacity: 0; transform: translate(var(--entry-title-x), var(--entry-title-y)) rotate(-14deg) skew(-18deg); }
+    100% { opacity: 1; transform: translate(0, 0) rotate(-3deg) skew(-10deg); }
+}
+
+@keyframes sectionCardLaunch {
+    0% { opacity: 0; transform: translate(var(--entry-card-x), var(--entry-card-y)) rotate(8deg) scale(0.9); }
+    70% { opacity: 1; transform: translate(-5px, -3px) rotate(-2deg) scale(1.02); }
+    100% { opacity: 1; transform: translate(0, 0) rotate(-1.5deg) scale(1); }
 }
 
 .page h2 {
@@ -1102,10 +1276,51 @@ body {
     color: var(--red);
 }
 
+.calling-card-signature {
+    margin: 10px 0 0;
+    color: var(--red);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+}
+
 /* CONTACTS */
 .links-group { margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; }
 .contact-link { background: var(--black); color: var(--white); padding: 10px 20px; text-decoration: none; font-weight: bold; transform: skew(-8deg); transition: 0.2s; border: 2px solid var(--black); }
 .contact-link:hover { background: var(--red); border-color: var(--red); }
+
+.contact-link-featured {
+    min-width: 185px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    box-shadow: 5px 5px 0 var(--red);
+}
+
+.contact-link-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    background: var(--white);
+    color: var(--black);
+    font-size: 12px;
+    font-weight: 900;
+    transform: skew(8deg);
+}
+
+.contact-link-text {
+    display: grid;
+    gap: 2px;
+    transform: skew(8deg);
+}
+
+.contact-link-text strong { font-size: 14px; letter-spacing: 1px; }
+.contact-link-text small { font-size: 9px; letter-spacing: 1px; opacity: 0.8; }
+.email-link { background: var(--red); border-color: var(--red); }
+.email-link:hover { background: var(--black); border-color: var(--black); }
+.contact-link-featured:hover { transform: translateY(-3px) skew(-8deg); box-shadow: 8px 8px 0 var(--red); }
 
 /* RETURN BUTTONS (ORIGINAL SIZE RESTORED) */
 .return-button {
@@ -1176,16 +1391,34 @@ body {
     .project h4 { font-size: 26px; }
     .social-link-top { align-items: flex-start; }
     .calling-objectives li { transform: none; }
+    .phantom-hud { top: auto; bottom: 14px; right: 14px; width: min(280px, calc(100vw - 28px)); opacity: 0.94; }
 }
 @media (max-width: 450px) {
     .page h2 { font-size: 28px; }
     .main-menu, .persona-card { width: 100%; max-width: 280px; }
     .status-line { grid-template-columns: 1fr; gap: 4px; }
     .status-line strong { text-align: left; }
+    .phantom-hud { display: none; }
 }
 
 @media (hover: none), (pointer: coarse) {
     body { cursor: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    /* Mantém a transição de navegação, que é parte essencial da interface. */
+    #slash-transition.active .slash.red { animation: personaSlash 0.45s ease-in-out forwards !important; }
+    #slash-transition.active .slash.black { animation: personaSlash 0.5s ease-in-out 0.04s forwards !important; }
+    #slash-transition.active .slash.white { animation: personaSlash 0.5s ease-in-out 0.08s forwards !important; }
 }
 /* PROFILE IMAGE - COLOR EFFECT ON HOVER */
 .profile-image img {
@@ -1261,6 +1494,10 @@ body {
     backdrop-filter: blur(8px);
 }
 
+#persona-modal.active .persona-modal-backdrop {
+    animation: personaModalShade 0.4s ease-out both;
+}
+
 .persona-modal-panel {
     position: absolute;
     inset: 50% auto auto 50%;
@@ -1276,11 +1513,101 @@ body {
     padding: 24px;
     opacity: 0;
     transition: transform 0.32s ease, opacity 0.32s ease;
+    overflow: hidden;
+    isolation: isolate;
 }
 
 #persona-modal.active .persona-modal-panel {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    animation: personaModalReveal 0.58s cubic-bezier(0.16, 0.92, 0.22, 1) both;
+}
+
+.persona-modal-panel::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: -65%;
+    left: -30%;
+    width: 35%;
+    height: 230%;
+    background: var(--red);
+    transform: rotate(24deg) translateX(-380%);
+    pointer-events: none;
+}
+
+.persona-modal-panel::after {
+    content: "PERSONA AWAKENED";
+    position: absolute;
+    z-index: 0;
+    right: 44px;
+    bottom: 18px;
+    color: rgba(230, 0, 18, 0.14);
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(24px, 5vw, 64px);
+    line-height: 0.8;
+    letter-spacing: -2px;
+    transform: rotate(-8deg);
+    pointer-events: none;
+}
+
+#persona-modal.active .persona-modal-panel::before {
+    animation: personaModalSlash 0.62s cubic-bezier(0.18, 0.85, 0.2, 1) both;
+}
+
+.persona-modal-card,
+.persona-modal-info,
+.persona-modal-close {
+    position: relative;
+    z-index: 1;
+}
+
+#persona-modal.active .persona-modal-card {
+    animation: personaCardDrop 0.42s 0.19s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+#persona-modal.active .persona-modal-info {
+    animation: personaInfoSlide 0.44s 0.3s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+#persona-modal.active .persona-info-item {
+    animation: personaStatStamp 0.28s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+#persona-modal.active .persona-info-item:nth-child(1) { animation-delay: 0.43s; }
+#persona-modal.active .persona-info-item:nth-child(2) { animation-delay: 0.5s; }
+#persona-modal.active .persona-info-item:nth-child(3) { animation-delay: 0.57s; }
+#persona-modal.active .persona-info-item:nth-child(4) { animation-delay: 0.64s; }
+
+@keyframes personaModalShade {
+    0% { opacity: 0; backdrop-filter: blur(0); }
+    100% { opacity: 1; backdrop-filter: blur(8px); }
+}
+
+@keyframes personaModalReveal {
+    0% { opacity: 0; clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); transform: translate(-50%, -50%) scale(0.72) rotate(-7deg); }
+    55% { opacity: 1; clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%); transform: translate(-50%, -50%) scale(1.04) rotate(1deg); }
+    100% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+@keyframes personaModalSlash {
+    0% { transform: rotate(24deg) translateX(-380%); }
+    100% { transform: rotate(24deg) translateX(540%); }
+}
+
+@keyframes personaCardDrop {
+    0% { opacity: 0; transform: translateX(-70px) rotate(-8deg) scale(0.9); }
+    100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
+}
+
+@keyframes personaInfoSlide {
+    0% { opacity: 0; transform: translateX(80px) skewX(-10deg); }
+    100% { opacity: 1; transform: translateX(0) skewX(0); }
+}
+
+@keyframes personaStatStamp {
+    0% { opacity: 0; transform: translateY(18px) skew(-16deg) scaleX(0.75); }
+    100% { opacity: 1; transform: translateY(0) skew(-6deg) scaleX(1); }
 }
 
 .persona-modal-card {
@@ -1345,6 +1672,7 @@ body {
 
 .persona-modal-close {
     position: absolute;
+    z-index: 5;
     top: 10px;
     right: 12px;
     width: 44px;
@@ -1355,6 +1683,7 @@ body {
     font-size: 30px;
     font-weight: 900;
     cursor: pointer;
+    pointer-events: auto;
     line-height: 1;
     box-shadow: 4px 4px 0 var(--black);
 }
@@ -1383,4 +1712,36 @@ body.modal-open {
     .persona-info-grid {
         grid-template-columns: 1fr;
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* A abertura do perfil é um comando iniciado pela própria pessoa. */
+    #persona-modal.active .persona-modal-backdrop { animation: personaModalShade 0.4s ease-out both !important; }
+    #persona-modal.active .persona-modal-panel { animation: personaModalReveal 0.58s cubic-bezier(0.16, 0.92, 0.22, 1) both !important; }
+    #persona-modal.active .persona-modal-panel::before { animation: personaModalSlash 0.62s cubic-bezier(0.18, 0.85, 0.2, 1) both !important; }
+    #persona-modal.active .persona-modal-card { animation: personaCardDrop 0.42s 0.19s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+    #persona-modal.active .persona-modal-info { animation: personaInfoSlide 0.44s 0.3s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+    #persona-modal.active .persona-info-item { animation: personaStatStamp 0.28s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+
+    /* Mantém a sequência de boot, acionada ao entrar no portfólio. */
+    #loading-screen { transition: opacity 0.5s ease !important; }
+    .loading-cuts span { animation: loadingCut 1.5s linear infinite !important; }
+    .dancing-text span { animation: p5LetterJump 0.4s infinite alternate ease-in-out !important; }
+    .dancing-text.glitch span { animation: p5LetterJump 0.22s infinite alternate steps(2), letterGlitch 0.16s infinite steps(2) !important; }
+    .dancing-text .space,
+    .dancing-text.glitch .space { animation: none !important; }
+    .loading-star::before { animation: p5StarSpin 2.2s linear infinite !important; }
+    .loading-bar-fill { animation: stripeMove 0.6s linear infinite !important; }
+    .loading-impact.active { animation: loadingImpact 0.42s cubic-bezier(0.2, 0.9, 0.2, 1) forwards !important; }
+
+    body.hero-awakened #hero::after { animation: heroAwakenSlash 0.74s cubic-bezier(0.18, 0.85, 0.2, 1) both !important; }
+    body.hero-awakened #hero .hero-content { animation: heroContentReveal 0.56s 0.13s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+    body.hero-awakened #hero .persona-card { animation: heroCardReveal 0.58s 0.25s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+    body.hero-returning #hero::after { animation: heroReturnSlash 0.72s cubic-bezier(0.18, 0.85, 0.2, 1) both !important; }
+    body.hero-returning #hero .hero-content { animation: heroReturnContent 0.56s 0.1s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+    body.hero-returning #hero .persona-card { animation: heroReturnCard 0.58s 0.22s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+    .section-entering > h2 { animation: sectionTitleLaunch 0.46s 0.06s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
+    .section-entering .content-card,
+    .section-entering .confidants-hud,
+    .section-entering .social-link-hud { animation: sectionCardLaunch 0.56s 0.17s cubic-bezier(0.19, 1, 0.22, 1) both !important; }
 }

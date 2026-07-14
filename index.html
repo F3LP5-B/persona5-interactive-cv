@@ -52,6 +52,23 @@
     <div id="particles-container"></div>
     <div id="noise-layer"></div>
 
+    <aside class="phantom-hud" aria-label="Status da navegação">
+        <div class="hud-topline">
+            <span>PHANTOM THIEVES // PORTFOLIO</span>
+            <span class="hud-live-dot" aria-hidden="true"></span>
+            <span>ONLINE</span>
+        </div>
+        <div class="hud-mainline">
+            <span class="hud-index" id="hud-index">00</span>
+            <div>
+                <span class="hud-label">CURRENT OPERATION</span>
+                <strong id="hud-title">SAFE ROOM</strong>
+            </div>
+        </div>
+        <div class="hud-progress" aria-hidden="true"><span id="hud-progress-fill"></span></div>
+        <p id="hud-subtitle">CONFIDANT RECORD // THE MOON</p>
+    </aside>
+
     <!-- SLASH TRANSITION EFFECT -->
     <div id="slash-transition">
         <span class="slash red"></span>
@@ -112,7 +129,7 @@
                 </nav>
             </div>
 
-            <div class="persona-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="persona-modal">
+            <div class="persona-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="persona-modal" aria-label="Abrir detalhes do perfil de Felipe Bragança">
                 <div class="card-header">PERSONA USER</div>
                 <div class="persona-core">CORE FILE</div>
                 <div class="profile-image">
@@ -140,7 +157,7 @@
                     <div class="status-line"><span>NAME</span><strong>FELIPE BRAGANÇA</strong></div>
                     <div class="status-line"><span>LEVEL</span><strong>21</strong></div>
                     <div class="status-line"><span>ROLE</span><strong>SOFTWARE ENGINEERING STUDENT</strong></div>
-                    <div class="status-line"><span>ARCANA</span><strong>THE MAGICIAN</strong>
+                    <div class="status-line"><span>ARCANA</span><strong>THE MOON</strong></div>
                 </div>
 
                 <div class="status-block">
@@ -149,6 +166,7 @@
                     <div class="status-line"><span>ORGANIZATION</span><strong>PREFEITURA DE NOVA LIMA</strong></div>
                     <div class="status-description">
                        Construção de sólida experiência profissional em infraestrutura de tecnologia, suporte analítico, resolução ágil de problemas e arquitetura de soluções de TI.
+                    </div>
                 </div>
 
                 <div class="status-block">
@@ -180,7 +198,7 @@
                             <span>ESPANOL</span>
                             <small>INTERMEDIÁRIO</small>
                         </div>
-                        <div class="language-bar"><div class="language-fill spanish" style="width: 65%"></div>
+                        <div class="language-bar"><div class="language-fill spanish" style="width: 65%"></div></div>
                     </div>
                 </div>
 
@@ -247,7 +265,6 @@
                         <small>Básico</small>
                     </div>
                     <div class="bar"><div class="fill" data-level="75"></div><b class="skill-value">0%</b></div>
-                </div>
                 </div>
             </div>
             <button class="return-button">RETURN</button>
@@ -371,10 +388,17 @@
                     <li><span>03</span> Entregue recursos polidos com confiança</li>
                 </ul>
                 <div class="calling-seal">SEAL OF CONFIDENCE</div>
+                <p class="calling-card-signature">— FELIPE BRAGANÇA // PHANTOM CODER</p>
                 <div class="links-group">
-                    <a href="https://github.com/F3LP5-B" target="_blank" class="contact-link">GITHUB</a>
-                    <a href="https://linkedin.com/in/felipe-bragança-godinho-a7a882277/" target="_blank" class="contact-link">LINKEDIN</a>
-                    <a href="mailto:felipegodinho183@gmail.com" class="contact-link">EMAIL</a>
+                    <a href="https://github.com/F3LP5-B" target="_blank" rel="noopener noreferrer" class="contact-link contact-link-featured github-link" aria-label="Abrir GitHub de Felipe Bragança">
+                        <span class="contact-link-icon" aria-hidden="true">GH</span>
+                        <span class="contact-link-text"><strong>GITHUB</strong><small>VER CÓDIGO</small></span>
+                    </a>
+                    <a href="https://linkedin.com/in/felipe-bragança-godinho-a7a882277/" target="_blank" rel="noopener noreferrer" class="contact-link">LINKEDIN</a>
+                    <a href="mailto:felipegodinho183@gmail.com" class="contact-link contact-link-featured email-link" aria-label="Enviar e-mail para Felipe Bragança">
+                        <span class="contact-link-icon" aria-hidden="true">@</span>
+                        <span class="contact-link-text"><strong>EMAIL</strong><small>ENVIAR MENSAGEM</small></span>
+                    </a>
                 </div>
             </div>
             <button class="return-button">RETURN</button>

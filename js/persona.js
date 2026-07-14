@@ -1,14 +1,21 @@
 // CONTROLLER GLOBAL
 let isAnimating = false;
+let loadingClosed = false;
 
 // LOADING SCREEN - FECHAMENTO DIRETO E SEGURO
 function fecharLoading() {
     const loader = document.getElementById("loading-screen");
-    if (loader) {
+    if (loader && !loadingClosed) {
+        loadingClosed = true;
         loader.style.opacity = "0";
         loader.style.pointerEvents = "none";
         setTimeout(() => {
             loader.style.display = "none";
+            document.body.classList.add("hero-awakened");
+            setTimeout(() => {
+                document.body.classList.remove("hero-awakened");
+                document.body.classList.add("hero-ready");
+            }, 900);
         }, 600);
     }
 }
@@ -96,7 +103,20 @@ setTimeout(fecharLoading, 3500);
 const menuButtons = document.querySelectorAll(".menu-btn");
 const slashTransition = document.getElementById("slash-transition");
 
-menuButtons.forEach(button => {
+function replaySectionEntrance(section, direction) {
+    if (!section) return;
+    const directionClass = `section-enter-${direction}`;
+    section.classList.remove("section-entering", "section-enter-left", "section-enter-right", "section-enter-up", "section-enter-down");
+    void section.offsetWidth;
+    section.classList.add("section-entering", directionClass);
+    setTimeout(() => {
+        section.classList.remove("section-entering", directionClass);
+    }, 850);
+}
+
+const menuDirections = ["left", "right", "up", "down", "left"];
+
+menuButtons.forEach((button, index) => {
     button.addEventListener("click", (e) => {
         e.preventDefault();
         if (isAnimating) return;
@@ -109,23 +129,46 @@ menuButtons.forEach(button => {
             slashTransition.classList.add("active");
 
             setTimeout(() => {
-                targetSection.scrollIntoView({ behavior: "smooth", block: "center" });
+                targetSection.scrollIntoView({ behavior: "auto", block: "center" });
+                replaySectionEntrance(targetSection, menuDirections[index]);
             }, 250);
 
             setTimeout(() => {
                 slashTransition.classList.remove("active");
                 isAnimating = false;
-            }, 600);
+            }, 800);
         }
     });
 });
 
 // INTERSECTION OBSERVER FOR SECTIONS
 const sections = document.querySelectorAll(".page");
+const hudIndex = document.getElementById("hud-index");
+const hudTitle = document.getElementById("hud-title");
+const hudSubtitle = document.getElementById("hud-subtitle");
+const hudProgressFill = document.getElementById("hud-progress-fill");
+const hudOperations = {
+    about: ["01", "STATUS", "PERSONA DATA // THE MOON", "31%"],
+    skills: ["02", "BATTLE STATS", "SKILL TREE // UNLOCKED", "47%"],
+    projects: ["03", "CONFIDANTS", "ACTIVE LINKS // PROJECT FILES", "64%"],
+    education: ["04", "SOCIAL LINK", "ROUTE DATA // PROGRESSION", "81%"],
+    contact: ["05", "CALLING CARD", "NEXT MISSION // AWAITING SIGNAL", "100%"]
+};
+
+function updatePhantomHud(sectionId) {
+    const operation = hudOperations[sectionId];
+    if (!operation || !hudIndex || !hudTitle || !hudSubtitle || !hudProgressFill) return;
+    hudIndex.textContent = operation[0];
+    hudTitle.textContent = operation[1];
+    hudSubtitle.textContent = operation[2];
+    hudProgressFill.style.width = operation[3];
+}
+
 const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add("show");
+            updatePhantomHud(entry.target.id);
             if (entry.target.id === "skills") {
                 const fills = entry.target.querySelectorAll(".fill");
                 fills.forEach(fill => {
@@ -146,16 +189,31 @@ sections.forEach(s => sectionObserver.observe(s));
 
 // RETURN BUTTONS
 const returnButtons = document.querySelectorAll(".return-button");
+
+function replayHeroEntrance() {
+    document.body.classList.remove("hero-awakened", "hero-returning", "hero-ready");
+    void document.body.offsetWidth;
+    document.body.classList.add("hero-returning");
+    setTimeout(() => {
+        document.body.classList.remove("hero-returning");
+        document.body.classList.add("hero-ready");
+    }, 850);
+}
+
 returnButtons.forEach(button => {
     button.addEventListener("click", () => {
         if (isAnimating) return;
         if (slashTransition) {
             isAnimating = true;
             slashTransition.classList.add("active");
-            setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, 250);
-            setTimeout(() => { slashTransition.classList.remove("active"); isAnimating = false; }, 600);
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: "auto" });
+                replayHeroEntrance();
+            }, 250);
+            setTimeout(() => { slashTransition.classList.remove("active"); isAnimating = false; }, 800);
         } else {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0, behavior: "auto" });
+            replayHeroEntrance();
         }
     });
 });
@@ -164,12 +222,15 @@ const personaCard = document.querySelector(".persona-card");
 const personaModal = document.getElementById("persona-modal");
 const personaModalClose = document.querySelector(".persona-modal-close");
 const personaModalBackdrop = document.querySelector(".persona-modal-backdrop");
+let lastFocusedElement = null;
 
 function abrirPersonaModal() {
     if (!personaModal) return;
+    lastFocusedElement = document.activeElement;
     personaModal.classList.add("active");
     personaModal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
+    if (personaModalClose) personaModalClose.focus();
 }
 
 function fecharPersonaModal() {
@@ -177,11 +238,12 @@ function fecharPersonaModal() {
     personaModal.classList.remove("active");
     personaModal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("modal-open");
+    if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
 }
 
 if (personaCard) {
     personaCard.addEventListener("click", abrirPersonaModal);
-    personaCard.addEventListener("keypress", (event) => {
+    personaCard.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             abrirPersonaModal();
